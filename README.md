@@ -1,18 +1,20 @@
-# Video Smoothener / Universal Video Enhancer
+# Video Smoothener / Video Enhancer Pro
 
-A Python script that uses FFmpeg to make videos smoother by interpolating frames and upscaling resolution. It supports GPU acceleration for NVIDIA, AMD, Intel, and a CPU fallback.
+A powerful desktop application for video smoothing, frame interpolation, and upscaling. Built with Python, FFmpeg, and a modern glassmorphism UI.
 
 ## Features
 
-- **Frame Interpolation**: Increase frame rate (e.g., 30fps to 60fps or 120fps) using motion compensation for smoother playback.
+- **Frame Interpolation**: Increase video frame rate (e.g., 30fps to 60fps or 120fps) using high-quality motion compensation.
 - **GPU Acceleration**:
   - **NVIDIA** (NVENC)
   - **AMD** (AMF/VCE, supports RX 580 and newer)
   - **Intel** (QSV)
   - **CPU** (Libx264 fallback)
-- **Upscaling**: Upscale video resolution (e.g., `2x`, `4K`, `1920x1080`).
-- **Quality Presets**: Choose between `fast`, `balanced`, and `quality` modes to trade speed for visual fidelity.
-- **Automatic GPU Detection**: Automatically detects your GPU or lets you manually specify one.
+- **Upscaling**: Upscale video resolution (e.g., 1080p to 4K).
+- **Customizable Quality**: Choose between `fast`, `balanced`, and `quality` encoding presets.
+- **Modern UI**: Native desktop feel with a glassmorphism design.
+- **GPU Support**: NVIDIA, AMD (RX 580+), Intel, and CPU fallback.
+- **Wallpaper Integration**: Supports a custom `wallpaper.jpg` for the UI background.
 
 ## Repository
 
@@ -23,7 +25,7 @@ https://github.com/Mikeykorby/Video-Smoothener.git
 - [Python 3.7+](https://www.python.org/downloads/)
 - [FFmpeg](https://ffmpeg.org/download.html) (must be added to your system's PATH)
 
-### Optional (for GPU acceleration)
+### GPU Acceleration Prerequisites
 
 - **NVIDIA**: Up-to-date GPU drivers.
 - **AMD**: Up-to-date GPU drivers (AMD Software).
@@ -38,80 +40,47 @@ git clone https://github.com/Mikeykorby/Video-Smoothener.git
 cd Video-Smoothener
 ```
 
-### 2. Install Python dependencies
+### 2. Install FFmpeg
 
-There are no external Python packages required (the script only uses the standard library). However, a `requirements.txt` is provided for good practice.
+FFmpeg is a required system dependency. You must download it manually.
+
+1. Download FFmpeg for Windows from the [official website](https://ffmpeg.org/download.html).
+2. Extract it to a folder (e.g., `C:/ffmpeg` on Windows).
+3. Add the `bin` directory to your system's `PATH` environment variable.
+
+### 3. Run the application
 
 ```bash
-pip install -r requirements.txt
+python video_enhancer.py
 ```
 
-### 3. Install FFmpeg
-
-FFmpeg is a system dependency and must be downloaded manually.
-
-1. Download FFmpeg from the [official website](https://ffmpeg.org/download.html).
-2. Extract it to a folder (e.g., `C:\ffmpeg` on Windows).
-3. Add the `bin` directory to your system's `PATH` environment variable.
+This will start a local web server and automatically open a native desktop window for the application.
 
 ## Usage
 
-### Basic Usage
+1.  **Select Source Media**: Use the browse button to select your video file.
+2.  **Configure Settings**:
+    - **Target FPS**: Choose your desired output frame rate (e.g., 60, 120).
+    - **Upscale Resolution**: Optionally increase the resolution.
+    - **Quality Preset**: Select `fast`, `balanced`, or `quality`.
+    - **Hardware Config**: Select your GPU or let it auto-detect.
+3.  **Add to Queue**: Click the button to start processing.
+4.  **Monitor Progress**: Watch the task queue and the output log for real-time updates.
 
-Increase a video's frame rate to 60 FPS.
+### Advanced Options
 
-```bash
-python video_enhancer.py input.mp4 output.mp4 60
-```
-
-### Advanced Examples
-
-**Upscaling and FPS increase:**
-```bash
-python video_enhancer.py input.mp4 output.mp4 120 --upscale 2x
-```
-
-**Use a specific GPU and quality preset:**
-```bash
-python video_enhancer.py input.mp4 output.mp4 60 --gpu amd --preset quality
-```
-
-**Upscale to a specific resolution:**
-```bash
-python video_enhancer.py input.mp4 output.mp4 60 --upscale 1920x1080 --preset fast
-```
-
-## Options
-
-| Option | Description | Default |
-| :--- | :--- | :--- |
-| `--gpu` | Specify the GPU type: `auto`, `nvidia`, `amd`, `intel`, `cpu` | `auto` |
-| `--preset` | Quality preset: `fast`, `balanced`, `quality` | `balanced` |
-| `--upscale` | Upscale resolution (e.g., `2x`, `4K`, `1920x1080`) | `None` |
-| `--list-presets` | List available quality presets | - |
-| `--list-gpus` | List available GPU options | - |
-
-### Quality Presets
-
-- **fast**: Quick processing with lower quality. Best for testing settings.
-- **balanced**: Good quality at a reasonable speed. Recommended for most use cases.
-- **quality**: Best visual quality, but significantly slower due to more complex motion estimation.
-
-### Upscale Formats
-
-- **Multiplier**: `2x`, `3x`
-- **Resolution**: `1920x1080`, `2560x1440`, `3840x2160`
-- **Preset Alias**: `720p`, `1080p`, `1440p`, `2k`, `4k`
+You can also trim the video, set a custom video bitrate, and add custom FFmpeg flags under the **Advanced Options** section.
 
 ## Troubleshooting
 
-- **`FFmpeg not found`**: Ensure FFmpeg is correctly installed and added to your system's `PATH` environment variable.
-- **`GPU not detected`**: You can manually force a GPU with the `--gpu` flag (e.g., `--gpu amd`). If the GPU encoder fails, the script will automatically fall back to CPU encoding (`libx264`), which will be slower.
-- **Slow performance with `quality` preset**: The `quality` preset uses more advanced and computationally heavy motion estimation. If it's too slow, try the `balanced` or `fast` preset.
+-   **FFmpeg not found**: Ensure FFmpeg is correctly installed and its `bin` directory is in your system's `PATH`.
+-   **GPU not detected**: You can manually select your GPU from the **Hardware Config** dropdown.
+-   **Slow performance**: The `quality` preset is significantly slower. Try `balanced` or `fast` for quicker results.
+-   **Wallpaper support**: Place a `wallpaper.jpg` in the same directory as `video_enhancer.py` for a custom background.
 
 ## Contributing
 
-Contributions are welcome! Feel free to submit a pull request or open an issue on the [GitHub repository](https://github.com/Mikeykorby/Video-Smoothener.git).
+Contributions are welcome! Please feel free to submit a pull request or open an issue on the [GitHub repository](https://github.com/Mikeykorby/Video-Smoothener.git).
 
 ## License
 
