@@ -16,10 +16,6 @@ A powerful desktop application for video smoothing, frame interpolation, and ups
 - **GPU Support**: NVIDIA, AMD (RX 580+), Intel, and CPU fallback.
 - **Wallpaper Integration**: Supports a custom `wallpaper.jpg` for the UI background.
 
-## Repository
-
-https://github.com/Mikeykorby/Video-Smoothener.git
-
 ## Requirements
 
 - [Python 3.7+](https://www.python.org/downloads/)
