@@ -1,0 +1,4 @@
+# Python Dependencies
+# This project uses only the Python standard library.
+# The only external system dependency is FFmpeg.
+# Ensure FFmpeg is installed and added to your system's PATH.
